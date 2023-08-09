@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:cosmic/views/favorites/favorites.dart';
 import 'package:cosmic/views/planet_details/planet_details.dart';
+import 'package:cosmic/views/profile/accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:cosmic/planets_data/planets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -15,6 +18,7 @@ class Home extends StatelessWidget {
                 image: AssetImage("assets/home/home.png"), fit: BoxFit.fill)),
         child: Scaffold(
             bottomNavigationBar: BottomNavigationBar(
+              onTap: (value) {},
               type: BottomNavigationBarType.fixed,
               iconSize: 30,
               selectedItemColor: const Color.fromARGB(255, 20, 67, 88),
@@ -46,7 +50,49 @@ class Home extends StatelessWidget {
               ],
               backgroundColor: Colors.transparent,
             ),
-            appBar: appBar2(context),
+            appBar: AppBar(
+                leading: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.menu,
+                      color: Colors.white,
+                    )),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20))),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Accounts()));
+                            },
+                            icon: const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                            ))),
+                  )
+                ],
+                backgroundColor: Colors.transparent,
+                centerTitle: true,
+                title: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "Milky way",
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    Text(
+                      "Solar System",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ],
+                )),
             backgroundColor: Colors.transparent,
             body: ListView(
               children: [
@@ -158,7 +204,7 @@ class Home extends StatelessWidget {
               ],
             )
           ]),
-        ),
+        ).animate().scale(duration: 1.seconds),
       ),
     );
   }
@@ -265,47 +311,4 @@ Widget buildPlanetCard(context, int index) {
       ),
     ),
   );
-}
-
-PreferredSizeWidget appBar2(context) {
-  return AppBar(
-      leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.white,
-          )),
-      shadowColor: Colors.black,
-      elevation: 10,
-      shape: const CircleBorder(),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white),
-                  borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ))),
-        )
-      ],
-      backgroundColor: Colors.transparent,
-      centerTitle: true,
-      title: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            "Milky way",
-            style: TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-          Text(
-            "Solar System",
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-        ],
-      ));
 }

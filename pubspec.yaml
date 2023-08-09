@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_animate: ^4.2.0+1
   flutter_svg: ^2.0.7
 
 dev_dependencies:
@@ -25,4 +26,5 @@ flutter:
     - assets/home/
     - assets/planets/
     - assets/details/
+    - assets/accounts/
 

@@ -1,6 +1,9 @@
+import 'package:cosmic/views/favorites/favorites.dart';
 import 'package:cosmic/views/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../profile/accounts.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

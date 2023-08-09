@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../planets_data/planets.dart';
@@ -70,6 +71,10 @@ class _PlanetDetailsState extends State<PlanetDetails> {
                       color: Colors.white,
                     )),
               )
+                  .animate(
+                    target: isSelected ? 1 : 0,
+                  )
+                  .shake(duration: 1.seconds)
             ],
           ),
           body: ListView(
@@ -188,6 +193,9 @@ class _PlanetDetailsState extends State<PlanetDetails> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Column(
                                     children: [
                                       SvgPicture.asset(
@@ -271,6 +279,6 @@ class _PlanetDetailsState extends State<PlanetDetails> {
           ),
         ),
       ),
-    );
+    ).animate().fadeIn(duration: 1.seconds);
   }
 }
