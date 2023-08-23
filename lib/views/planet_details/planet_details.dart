@@ -1,22 +1,30 @@
+import 'package:cosmic/planets_data/appState.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../planets_data/planets.dart';
 
-class PlanetDetails extends StatefulWidget {
-  const PlanetDetails({super.key});
+class PlanetDetails extends StatelessWidget {
+   PlanetDetails({super.key});
 
-  @override
-  State<PlanetDetails> createState() => _PlanetDetailsState();
-}
+ void _handleAddtoFav(Planet planet,BuildContext context){
+    AppStateWidget.of(context).addToFavorites(planet);
+  }
+  void _handleOnRemove(Planet planet,BuildContext context){
+    AppStateWidget.of(context).removeFromCart(planet);
+  }
+ 
 
-class _PlanetDetailsState extends State<PlanetDetails> {
-  bool isSelected = false;
+    bool added = false ;
+
   @override
   Widget build(BuildContext context) {
+  
     final recieved = ModalRoute.of(context)!.settings.arguments as Map;
     Planet planet = recieved["planet"];
+
+   
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -55,12 +63,12 @@ class _PlanetDetailsState extends State<PlanetDetails> {
                     border: Border.all(
                         color: const Color.fromARGB(255, 0, 11, 12))),
                 child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isSelected = !isSelected;
-                      });
+                    onPressed: (){
+                      
+                      added?_handleOnRemove(planet, context):
+                      _handleAddtoFav(planet, context);
+                      added=true;
                     },
-                    isSelected: isSelected,
                     selectedIcon: const Icon(
                       Icons.favorite,
                       semanticLabel: "Like",
@@ -72,9 +80,11 @@ class _PlanetDetailsState extends State<PlanetDetails> {
                     )),
               )
                   .animate(
-                    target: isSelected ? 1 : 0,
+                    target: added ? 0 : 1,
                   )
                   .shake(duration: 1.seconds)
+                  .then()
+                  .shimmer()
             ],
           ),
           body: ListView(

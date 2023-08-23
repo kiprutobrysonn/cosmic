@@ -7,8 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:cosmic/planets_data/planets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Home extends StatefulWidget {
+  Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
+  var index = 0;
+  static  List<Widget> _list = [
+    HomeView(),
+    Favorites(),
+    Placeholder()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +31,15 @@ class Home extends StatelessWidget {
                 image: AssetImage("assets/home/home.png"), fit: BoxFit.fill)),
         child: Scaffold(
             bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) {},
+              onTap: (value) {
+                setState(() {
+                  index=value;
+                });
+                 },
               type: BottomNavigationBarType.fixed,
               iconSize: 30,
               selectedItemColor: const Color.fromARGB(255, 20, 67, 88),
-              currentIndex: 0,
+              currentIndex: index,
               unselectedItemColor: Colors.white,
               showUnselectedLabels: true,
               items: const [
@@ -94,23 +111,38 @@ class Home extends StatelessWidget {
                   ],
                 )),
             backgroundColor: Colors.transparent,
-            body: ListView(
-              children: [
-                const Divider(
-                  thickness: 1,
-                ),
-                Container(
-                    height: 70,
-                    child: ListView.builder(
-                      itemCount: 8,
-                      itemBuilder: buildPlanetCard,
-                      scrollDirection: Axis.horizontal,
-                    )),
-                planetOftheDay(context),
-                solarInfor(context)
-              ],
-            )));
+            body: _list.elementAt(index)));
   }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        const Divider(
+          thickness: 1,
+        ),
+        Container(
+            height: 70,
+            child: ListView.builder(
+              itemCount: 8,
+              itemBuilder: buildPlanetCard,
+              scrollDirection: Axis.horizontal,
+            )),
+        planetOftheDay(context),
+        solarInfor(context)
+      ],
+    );
+  }
+}
+
+
+
 
   Widget planetOftheDay(BuildContext context) {
     Planet rndPlanet =
@@ -208,7 +240,7 @@ class Home extends StatelessWidget {
       ),
     );
   }
-}
+
 
 Widget solarInfor(BuildContext context) {
   return Padding(
@@ -301,6 +333,9 @@ Widget buildPlanetCard(context, int index) {
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(20)),
                     child: planet.planetImage,
+                  ),
+                  SizedBox(
+                    width: 8,
                   ),
                   Text(planet.name),
                 ],
