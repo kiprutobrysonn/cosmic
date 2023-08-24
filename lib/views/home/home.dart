@@ -25,7 +25,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    print(index);
     return Container(
+      
         decoration: const BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/home/home.png"), fit: BoxFit.fill)),
@@ -38,30 +40,36 @@ class _HomeState extends State<Home> {
                  },
               type: BottomNavigationBarType.fixed,
               iconSize: 30,
-              selectedItemColor: const Color.fromARGB(255, 20, 67, 88),
+              selectedItemColor: Color.fromARGB(255, 8, 170, 245),
               currentIndex: index,
-              unselectedItemColor: Colors.white,
-              showUnselectedLabels: true,
+              
+           
+              elevation: 5,
               items: const [
                 BottomNavigationBarItem(
+                  
                     tooltip: "Home",
                     icon: Icon(
                       Icons.home,
-                      color: Color.fromARGB(255, 120, 191, 224),
+                      color: Color.fromARGB(255, 113, 193, 224),
                     ),
                     label: "Home"),
                 BottomNavigationBarItem(
+
+                  backgroundColor: Color.fromARGB(255, 120, 191, 224),
                     tooltip: "Favourites",
                     icon: Icon(
-                      Icons.favorite_border_outlined,
-                      color: Colors.grey,
+                      Icons.favorite,
+                      
+                      color: Color.fromARGB(255, 82, 194, 228),
                     ),
                     label: "Favourites"),
                 BottomNavigationBarItem(
+
                     tooltip: "More",
                     icon: Icon(
                       Icons.more_horiz,
-                      color: Color.fromARGB(255, 213, 220, 223),
+                      color: Color.fromARGB(255, 119, 196, 230),
                     ),
                     label: "More"),
               ],
@@ -79,7 +87,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.only(right: 20),
                     child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
+                            border: Border.all(color: Color.fromARGB(255, 59, 118, 206),width: 0.5),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(20))),
                         child: IconButton(
@@ -102,7 +110,7 @@ class _HomeState extends State<Home> {
                   children: [
                     const Text(
                       "Milky way",
-                      style: TextStyle(fontSize: 12, color: Colors.grey),
+                      style: TextStyle(fontSize: 12, color: Color.fromARGB(255, 158, 158, 158)),
                     ),
                     Text(
                       "Solar System",

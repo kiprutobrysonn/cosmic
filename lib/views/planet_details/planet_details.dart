@@ -23,6 +23,7 @@ class PlanetDetails extends StatelessWidget {
   
     final recieved = ModalRoute.of(context)!.settings.arguments as Map;
     Planet planet = recieved["planet"];
+    added=(AppStateScope.of(context).favPlanet!.contains(planet))?true:false;
 
    
     return Container(
@@ -63,6 +64,7 @@ class PlanetDetails extends StatelessWidget {
                     border: Border.all(
                         color: const Color.fromARGB(255, 0, 11, 12))),
                 child: IconButton(
+                isSelected: added,
                     onPressed: (){
                       
                       added?_handleOnRemove(planet, context):
@@ -80,9 +82,11 @@ class PlanetDetails extends StatelessWidget {
                     )),
               )
                   .animate(
-                    target: added ? 0 : 1,
+                    target: added?0:1
+                   
                   )
-                  .shake(duration: 1.seconds)
+                  .scaleXY(duration: 1.8.seconds,begin: 1)
+                  .shake()
                   .then()
                   .shimmer()
             ],

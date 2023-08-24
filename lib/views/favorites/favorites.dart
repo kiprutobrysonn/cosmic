@@ -12,6 +12,8 @@ class Favorites extends StatelessWidget {
    List planets=List.from(AppStateScope.of(context).favPlanet as Iterable);
 
     return ListView(
+      children:
+      planets.map((e) => favPlanets(context, e)).toList()
       
       
 
@@ -19,7 +21,7 @@ class Favorites extends StatelessWidget {
   }
 }
 
- Widget planetOftheDay(BuildContext context,Planet planet) {    
+ Widget favPlanets(BuildContext context,Planet planet) {    
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Card(
@@ -41,14 +43,16 @@ class Favorites extends StatelessWidget {
           ),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                "Planet of the day",
-                style: Theme.of(context).textTheme.titleSmall,
-                textAlign: TextAlign.left,
-              ),
-            ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(onPressed: (){
+                  AppStateWidget.of(context).removeFromCart(planet);
+              
+        
+                
+                  }, icon: Icon(Icons.delete,semanticLabel:"Remove from favorites" ,)),
+                ),
+           
             Row(
               children: [
                 Padding(
@@ -109,7 +113,7 @@ class Favorites extends StatelessWidget {
               ],
             )
           ]),
-        ).animate().scale(duration: 1.seconds),
+        ).animate().shimmer(duration: 1.seconds),
       ),
     );
   }
